@@ -33,6 +33,18 @@ An ``unsigned int`` which contains the X and Y positions.
 
 Each values is mapped onto an ``unsigned short`` where ``0`` is the left or bottom position.
 
+## Usage
+
+```blocks
+bluedot.startService();
+bluedot.onButton(BlueDotButtonState.Down, () => {
+    led.unplot(0, 2);
+})
+bluedot.onButton(BlueDotButtonState.Up, () => {
+    led.plot(0, 2);
+})
+```
+
 ## License
 
 MIT
