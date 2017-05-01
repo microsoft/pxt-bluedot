@@ -6,10 +6,12 @@ WORK IN PROGRESS
 
 ### ~
 
+A sample of Bluetooth Low Energy port of the [BlueDot](https://github.com/martinohanlon/BlueDot/) protocol
+for the micro:bit.
+
 ## Bluetooth Low Energy Service
 
 The BlueDot service contains 2 characteristic for the button pressure and the position.
-
 
 * Service UUID: ``cf638d8f-ea58-4015-90a6-76f1f11aaa4f``
 
@@ -34,6 +36,10 @@ Each values is mapped onto an ``unsigned short`` where ``0`` is the left or bott
 ## License
 
 MIT
+
+# Contributing
+ 
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Supported targets
 
