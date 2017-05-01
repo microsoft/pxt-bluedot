@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title>BLE BlueDot Test Page</title>
+
+    <link ref="stylesheet" href="https://pxt.azureedge.net/blob/aa184cd9d078a3c8896d0997d394ca13904690c3/semantic.css" />
+    <script type="text/javascript" src="https://pxt.azureedge.net/blob/5c3c456ac484e2f7244a7e8d16578d77eb218373/jquery.js"></script>
+    <script type="text/javascript" src="https://pxt.azureedge.net/blob/ebc7a584e3668a54f633baee6aa0dc793471da58/semantic.js"></script>
+
+    <style>
+        #bluedot {
+            background: #0000ff;
+            position: absolute;
+            left: 1em;
+            top: 1em;
+            right: 1em;
+            bottom: 1em;
+            border-radius: 50%;
+        }
+    </style>
+
+    <script>
+        let buttonCharacteristic;
+        let updater;
+
+        function updateButton(pressure) {
+            if (!buttonCharacteristic) return;
+
+            console.log('button update to ' + pressure)
+            var payload = Uint8Array.of(pressure);
+            return buttonCharacteristic.writeValue(1)
+                .then(() => {
+                    console.log('button update success');
+                })
+        }
+
+        function connect() {
+            navigator.bluetooth.requestDevice({ filters: [{ 
+                services: ['cf638d8f-ea58-4015-90a6-76f1f11aaa4f'] 
+            }] })
+                .then(device => {
+                    console.log('connected to device')
+                    return device.gatt.connect();
+                })
+                .then(server => {
+                    console.log('connected to gatt')
+                    return server.getPrimaryService('cf638d8f-ea58-4015-90a6-76f1f11aaa4f');
+                })
+                .then(service => {
+                    console.log('connected to service')
+                    return service.getCharacteristic('cf6363c2-ea58-4015-90a6-76f1f11aaa4f');
+                })
+                .then(characteristic => {
+                    console.log('connected to characteristic')
+                    buttonCharacteristic = characteristic;
+                })
+        }
+
+        $(document).ready(() => {
+            console.log('init...')
+            $('#connect').click(connect);
+            $('#bluedot').mousedown(() => updateButton(1))
+                .mouseup(() => updateButton(0));
+        })
+    </script>
+</head>
+
+<body>
+    <div id="bluedot"></div>
+    <button class="ui button" id="connect">connect</connect>
+
+</body>
