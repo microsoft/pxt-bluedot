@@ -55,9 +55,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## Supported targets
 
-* for PXT/ microbit
-(The metadata above is needed for package search.)
-
 ```package
 bluedot=github:microsoft/pxt-bluedot
 ```
